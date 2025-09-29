@@ -9,7 +9,6 @@ use App\Http\Controllers\MatakuliahController;
 Route::get('/', function () {
     return view('welcome');
 });
-//hahahhhhaaha
 
 Route::get('/pcr', function() {
     return 'Selamat Datang di Website Kampus PCR!';
