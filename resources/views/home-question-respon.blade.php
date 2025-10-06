@@ -57,7 +57,7 @@
 
         <blockquote>
             <strong>Pertanyaan Anda:</strong><br>
-            {{ $pertanyaan }}
+            {{$pertanyaan}}
         </blockquote>
 
         <p class="email-info mt-4">
