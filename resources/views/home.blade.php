@@ -51,8 +51,8 @@
                 <!-- Hero Section -->
                 <section class="hero-section">
                     <div class="container">
-                        <h1 class="display-6 mb-2">{{$username}}</h1>
-                        <p class="lead mb-0">{{$last_login}}</p>
+                        <h1 class="display-6 mb-2">{{ $username }}</h1>
+                        <p class="lead mb-0">{{ $last_login }}</p>
                     </div>
                 </section>
 
@@ -76,15 +76,28 @@
 
             {{-- Fitur 2 --}}
             <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card h-100 shadow-sm">
+                <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Struktur Blade</h5>
-                        <p class="card-text">Menggunakan sistem layout Blade yang efisien untuk kemudahan maintenance
-                            dan pengembangan.</p>
+                        <h5 class="card-title">Form Pertanyaan</h5>
+                        <form action="{{ route('question.store') }}" method="POST">
+                            @csrf <form action="" method="POST">
+                                <div class="mb-3">
+                                    <label for="nama" class="form-label">Nama</label>
+                                    <input type="text" class="form-control" name="nama">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="text" class="form-control" name="email">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="pertanyaan" class="form-label">Pertanyaan</label>
+                                    <textarea name="pertanyaan" class="form-control" rows="3"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Kirim Pertanyaan</button>
+                            </form>
                     </div>
                 </div>
             </div>
-
             {{-- Fitur 3 --}}
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="card h-100 shadow-sm">
