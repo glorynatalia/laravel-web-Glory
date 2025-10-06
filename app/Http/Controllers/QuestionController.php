@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -36,10 +35,17 @@ class QuestionController extends Controller
         //return view('home-question-respon', $data);
 
         $request->validate([
-            'nama' => 'required',
-            'email' => 'required|email',
-            'pertanyaan' => 'required'
+            'nama'       => 'required|max10',
+            'email'      => 'required|email',
+            'pertanyaan' => 'required|max:300|min:8',
+        ], [
+
+            'nama.required' => 'Nama tidak boleh kosong',
+            'email.required' => 'Email Tidak valid',
         ]);
+
+        return view('home-question-respon', $data);
+
     }
 
     /**
