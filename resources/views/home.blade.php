@@ -105,7 +105,7 @@
 
                                 <div class="mb-3">
                                     <label for="pertanyaan" class="form-label">Pertanyaan</label>
-                                    <textarea class="form-control" id="pertanyaan" name="pertanyaan" rows="3">{{ old('pertanyaan') }}</textarea>
+                                    <textarea class="form-control" id="pertanyaan" name="pertanyaan" rows="4">{{ old('pertanyaan') }}</textarea>
                                 </div>
                                 <a href="resource/views/home-question-respon.blade.php"></a>
                                 <button type="submit" class="btn btn-primary">Kirim Pertanyaan</button>
