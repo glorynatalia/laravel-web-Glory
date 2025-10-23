@@ -21,5 +21,6 @@ class MatakuliahController extends Controller
         } else {
             return "Masukkan kode matakuliah!";
         }
+
     }
 }

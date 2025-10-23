@@ -1,0 +1,12 @@
+.navbar-logo {
+    height: 40px;
+    weight: auto;
+}
+@font-face {
+    font-family: 'Lora-Bold';
+    src: url('../fonts/Lora-Bold.ttf');
+}
+
+.font-custom{
+    font-family: 'Lora-Bold';
+}

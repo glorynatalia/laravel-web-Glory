@@ -11,6 +11,8 @@
     {{-- Bootstrap 5 CSS dari CDN untuk styling --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="{{ asset('assets/css/custom-style.css') }}">
 </head>
 
 <body>
@@ -46,16 +48,13 @@
     <main class="container my-5">
 
         {{-- Hero Section / Jumbotron --}}
-        <div class="p-5 mb-4 bg-light rounded-3 text-center">
+         <div class="p-5 mb-4 bg-light rounded-3 text-center">
             <div class="container-fluid py-5">
-                <!-- Hero Section -->
-                <section class="hero-section">
-                    <div class="container">
-                        <h1 class="display-6 mb-2">{{ $username }}</h1>
-                        <p class="lead mb-0">{{ $last_login }}</p>
-                    </div>
-                </section>
-
+                <h1 class="display-5 fw-bold font-custom">WELCOME SWEETIE</h1>
+                <img src="{{ asset('assets/images/thvv.jpg') }}" alt="Logo" style="width: 35%">
+                <h1 class="display-5 fw-bold">Hero ku 🚀</h1>
+                <p class="fs-4 col-md-8 mx-auto">29-09-2025</p>
+                <a href="#" class="btn btn-primary btn-lg mt-3">Pelajari Lebih Lanjut</a>
             </div>
         </div>
 
@@ -70,6 +69,7 @@
                         <h5 class="card-title">Desain Modern</h5>
                         <p class="card-text">Dibangun dengan Bootstrap 5 untuk memastikan tampilan yang bersih dan
                             responsif di semua perangkat.</p>
+
                     </div>
                 </div>
             </div>
@@ -89,12 +89,18 @@
                                     </ul>
                                 </div>
                             @endif
+                            @if (session('info'))
+                                <div class="alert alert-info">
+                                    {!! session('info') !!}
+                                </div>
+                            @endif
                         </div>
                         <form action="{{ route('question.store') }}" method="POST">
-                            @csrf <form action="" method="POST">
+                            @csrf
                                 <div class="mb-3">
                                     <label for="nama" class="form-label">Nama</label>
-                                    <input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama') }}">
+                                    <input type="text" class="form-control" id="nama" name="username"
+                                        value="{{ old('username') }}">
                                 </div>
 
                                 <div class="mb-3">

@@ -10,20 +10,10 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        //
+        return view('home');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         //dd($request->all());
@@ -35,48 +25,23 @@ class QuestionController extends Controller
         //return view('home-question-respon', $data);
 
         $request->validate([
-            'nama'       => 'required|max10',
+            'username'       => 'required|max:10',
             'email'      => 'required|email',
             'pertanyaan' => 'required|max:300|min:8',
         ], [
 
-            'nama.required' => 'Nama tidak boleh kosong',
+            'username.required' => 'Nama tidak boleh kosong',
+            'username.max' => 'Nama maksimal 10 karakter',
             'email.required' => 'Email Tidak valid',
         ]);
 
-        return view('home-question-respon', $data);
+        //return view('home-question-respon', $data);
+        //return redirect()->router('home);
+        //return redirect()->back();
+        //return redirect()->away('https://pcr.ac.id');
+        return redirect()->route('home.index')->with('info', 'berhasil dikirim');
 
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }
