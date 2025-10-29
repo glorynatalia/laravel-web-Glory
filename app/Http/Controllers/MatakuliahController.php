@@ -6,14 +6,11 @@ use Illuminate\Http\Request;
 
 class MatakuliahController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         return "Menampilkan data matakuliah";
     }
-//PACAR TAEHYUNG
+
     public function show($kode = null)
     {
         if ($kode) {
@@ -21,6 +18,6 @@ class MatakuliahController extends Controller
         } else {
             return "Masukkan kode matakuliah!";
         }
-
     }
+
 }
