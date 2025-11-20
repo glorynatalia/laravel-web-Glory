@@ -27,24 +27,18 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
-
-        $request->validate([
-            'nama' => 'required|max:10',
-            'email' => ['required','email'],
-            'pertanyaan' => 'required|max:300|min:8',
+   		$request->validate([
+		    'nama'  => 'required|max:10',
+		    'email' => ['required','email'],
+		    'pertanyaan' => 'required|max:300|min:8',
         ],[
-            'nama.required' => 'Nama tidak boleh kosong',
-            'email.email' => 'email tidak valid',
+            'nama.required'=>'Nama tidak boleh kosong',
+            'email.email'=> 'email tidak valid'
         ]);
-
-        // return redirect()->route('home');
-
+        // return redirect()->route('home') ;
         // return redirect()->back();
-
-        // return redirect()->away('https://pcr.ac.id');
-
-        return redirect()->route('home')->with('info', 'Selamat, Kamu Lulus!');
+        // return redirect()->away('https://www.pcr.ac.id');
+        return redirect()->route('home')->with('info', 'Form pertanyaan berhasil di kirim!!');
     }
 
     /**

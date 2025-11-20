@@ -62,7 +62,7 @@ class PelangganController extends Controller
         $dataPelanggan = Pelanggan::find($id); // ambil data sesuai id
         return view('admin.pelanggan.edit', compact('dataPelanggan'));
 
-                                      
+
     }
 
     /**

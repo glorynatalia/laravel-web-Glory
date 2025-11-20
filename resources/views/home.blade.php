@@ -2,19 +2,16 @@
 <html lang="id">
 
 <head>
-    <link rel="stylesheet" href="{{ asset('assets/css/custom-style.css') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playwrite+DE+SAS:wght@100..400&display=swap" rel="stylesheet">
 
     <title>Halaman Utama - Selamat Datang!</title>
 
     {{-- Bootstrap 5 CSS dari CDN untuk styling --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('assets/css/custom-style.css') }}">
 </head>
 
 <body>
@@ -28,7 +25,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul nclass="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/">Home</a>
                     </li>
@@ -52,69 +49,72 @@
         {{-- Hero Section / Jumbotron --}}
         <div class="p-5 mb-4 bg-light rounded-3 text-center">
             <div class="container-fluid py-5">
-                <h1 class="display-5 fw-bold font-custom">{{ $username }}</h1>
-                <p class="fs-4 col-md-8 mx-auto">{{ $last_login }}</p>
-                <a href="#" class="btn btn-primary btn-lg mt-3">Pelajari Lebih Lanjut</a>
+                <section class="hero-section">
+                    <div class="container">
+                        <h1 class="display-6-mb-2">{{ $username }}</h1>
+                        <p class="lead mb-0">{{ $last_login }}</p>
+                    </div>
+                </section>
             </div>
         </div>
 
         {{-- Features Section --}}
         <div class="row text-center">
-            <h2 class="mb-4 font-custom">Fitur Unggulan Kami</h2>
+            <h2 class="mb-4">Fitur Unggulan Kami</h2>
 
             {{-- Fitur 1 --}}
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="card h-100 shadow-sm">
                     <div class="card-body">
-                        <h5 class="card-title font-custom">Desain Modern</h5>
+                        <h5 class="card-title">Healing</h5>
                         <p class="card-text">Dibangun dengan Bootstrap 5 untuk memastikan tampilan yang bersih dan
                             responsif di semua perangkat.</p>
-                            <img src="{{ asset('assets/images/nct.jpg') }}" alt="Logo">
+                            <img src="{{ asset('assets/images/dream.png') }}" alt="Logo">
                     </div>
                 </div>
             </div>
 
             {{-- Fitur 2 --}}
             <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card h-100 shadow-sm">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Form Pertanyaan</h5>
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
-                            @if (session('info'))
-                                <div class="alert alert-info">
-                                    {!! session('info') !!}
-                                </div>
-                            @endif
-                            <form action="{{ route('question.store') }}" method="POST">
-                                @csrf
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Form Pertanyaan</h5>
 
-                                <form action="" method="POST">
-                                    <div class="mb-3">
-                                        <label for="nama" class="form-label">Nama</label>
-                                        <input type="text" class="form-control" name="nama"
-                                            value="{{ old('nama') }}">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="email" class="form-label">Email</label>
-                                        <input type="text" class="form-control" name="email"
-                                            value="{{ old('email') }}">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="pertanyaan" class="form-label">Pertanyaan</label>
-                                        <textarea class="form-control" rows="4" name="pertanyaan" rows="4">{{ old('pertanyaan') }}</textarea>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Kirim Pertanyaan</button>
-                                </form>
-                        </div>
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        @if (session('info'))
+                            <div class="alert alert-info">
+                                {!! session('info') !!}
+                            </div>
+                        @endif
+
+                        <form action="{{ route('question.store') }}" method="POST">
+                            @csrf
+
+                            <form action="" method="POST">
+                                <div class="mb-3">
+                                    <label for="nama" class="form-label">Nama</label>
+                                    <input type="text" class="form-control" id="nama" name="nama"
+                                        value="{{ old('nama') }}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="text" class="form-control" id="email" name="email"
+                                        value="{{ old('email') }}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="pertanyaan" class="form-label">Pertanyaan</label>
+                                    <textarea class="form-control" rows="4" id="pertanyaan" name="pertanyaan" value="{{ old('pertanyaan') }}"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Kirim Pertanyaan</button>
+                            </form>
                     </div>
                 </div>
             </div>
@@ -123,9 +123,10 @@
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="card h-100 shadow-sm">
                     <div class="card-body">
-                        <h5 class="card-title">my baby honey sweetie handsome uul</h5>
-                        <p class="card-text">ini pacar gwej</p>
-                            <img src="{{ asset('assets/images/bb.jpg') }}" alt="Logo" style="width: 65%">
+                        <h5 class="card-title">abanggg</h5>
+                        <p class="card-text">Kode yang rapi dan terstruktur, memudahkan Anda untuk mengubah konten
+                            sesuai kebutuhan proyek.</p>
+                        <img src="{{ asset('assets/images/abang.png') }}" alt="Logo" style="width: 60%">
                     </div>
                 </div>
             </div>
@@ -148,11 +149,3 @@
 </body>
 
 </html>
-
-<!-- Hero Section -->
-<section class="hero-section">
-    <div class="container">
-        <h1 class="display-6 mb-2">{{ $username }}</h1>
-        <p class="lead mb-0">{{ $last_login }}</p>
-    </div>
-</section>
