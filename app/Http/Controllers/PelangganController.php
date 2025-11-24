@@ -11,9 +11,8 @@ class PelangganController extends Controller
      */
     public function index()
     {
-        $data['dataPelanggan'] = Pelanggan::all();
+        $data['dataPelanggan'] = Pelanggan::paginate(10); // ← INI YANG DIUBAH
         return view('admin.pelanggan.index', $data);
-
     }
 
     /**
@@ -22,9 +21,6 @@ class PelangganController extends Controller
     public function create()
     {
         return view('admin.pelanggan.create');
-
-                                          // edit 2
-        return view('admin.user.create'); // tampilkan form tambah user
     }
 
     /**
@@ -43,7 +39,6 @@ class PelangganController extends Controller
         Pelanggan::create($data);
 
         return redirect()->route('pelanggan.index')->with('success', 'Penambahan Data Berhasil!');
-
     }
 
     /**
@@ -61,8 +56,6 @@ class PelangganController extends Controller
     {
         $dataPelanggan = Pelanggan::find($id); // ambil data sesuai id
         return view('admin.pelanggan.edit', compact('dataPelanggan'));
-
-
     }
 
     /**
