@@ -3,74 +3,89 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Hash;
+
 
 class UserController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        $dataUser = User::all();
-        return view('admin.user.index', compact('dataUser'));
+        $data['dataUser'] = User::all();
+		return view('admin.user.index',$data);
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
         return view('admin.user.create');
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
-        // VALIDASI SEDERHANA
-        $request->validate([
-            'name' => 'required|string|max:100',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:8|confirmed',
-        ]);
+        //dd($request->all());
 
-        // BUAT USER
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password)
-        ]);
+        $data['name'] = $request->name;
+		$data['email'] = $request->email;
+		//$data['password'] = $request->password;
+        $data['password'] = Hash::make($request->password);
 
-        return redirect()->route('users.index')->with('success', 'User berhasil ditambahkan!');
+		User::create($data);
+
+		return redirect()->route('user.index')->with('success','Penambahan Data Berhasil!');
     }
 
-    public function edit($id)
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
     {
-        $dataUser = User::findOrFail($id);
-        return view('admin.user.edit', compact('dataUser'));
+        //
     }
 
-    public function update(Request $request, $id)
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
     {
-        $user = User::findOrFail($id);
+        $data['dataUser'] = User::findOrFail($id);
+        return view('admin.user.edit', $data);
+    }
 
-        $request->validate([
-            'name' => 'required|string|max:100',
-            'email' => 'required|email|unique:users,email,' . $id,
-            'password' => 'nullable|min:8|confirmed',
-        ]);
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        $user_id = $id;
+        $user = User::findOrFail($user_id);
 
         $user->name = $request->name;
         $user->email = $request->email;
-
-        if ($request->password) {
-            $user->password = Hash::make($request->password);
-        }
+        $user->password = $request->password;
 
         $user->save();
-
-        return redirect()->route('users.index')->with('success', 'User berhasil diupdate!');
+        return redirect()->route('user.index')->with('success', 'Perubahan Data Berhasil!');
     }
 
-    public function destroy($id)
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
     {
         $user = User::findOrFail($id);
-        $user->delete();
 
-        return redirect()->route('users.index')->with('success', 'User berhasil dihapus!');
+        $user->delete();
+        return redirect()->route('user.index')->with('success', 'Data berhasil dihapus');
     }
 }

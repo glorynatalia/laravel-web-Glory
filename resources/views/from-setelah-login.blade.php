@@ -52,20 +52,15 @@
 <body>
 
     <div class="thankyou-container">
-        <h2>Terima Kasih, {{$nama}}! 🎉</h2>
-        <p class="lead">Pertanyaan Anda telah berhasil dikirim.</p>
+        <h2>Terima Kasih, {{$username}}! 🎉</h2>
+        <p class="lead">Anda berhasil login.</p>
 
         <blockquote>
-            <strong>Pertanyaan Anda:</strong><br>
-            "{{$pertanyaan}}"
+            <strong>Password anda adalah : </strong>{{ $password }}<br>
         </blockquote>
 
-        <p class="email-info mt-4">
-            Pertanyaan Anda akan segera kami tanggapi dan balas melalui email <strong>{{$email}}</strong>.<br><br>
-            Mohon cek kotak masuk atau folder spam Anda secara berkala.
-        </p>
 
-        <a href="{{ url('/') }}" class="btn btn-primary mt-4">Kembali ke Beranda</a>
+        <a href="resource/views/login-form.blade.php" class="btn btn-primary mt-4">Kembali ke Beranda</a>
     </div>
 
 </body>
