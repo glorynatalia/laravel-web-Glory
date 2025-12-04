@@ -1,75 +1,71 @@
-{
-    "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
-    "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
-    "license": "MIT",
-    "require": {
-        "php": "^8.2",
-        "laravel/framework": "^12.0",
-        "laravel/tinker": "^2.10.1"
-    },
-    "require-dev": {
-        "fakerphp/faker": "^1.23",
-        "laravel/pail": "^1.2.2",
-        "laravel/pint": "^1.24",
-        "laravel/sail": "^1.41",
-        "mockery/mockery": "^1.6",
-        "nunomaduro/collision": "^8.6",
-        "phpunit/phpunit": "^11.5.3"
-    },
-    "autoload": {
-        "psr-4": {
-            "App\\": "app/",
-            "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Tests\\": "tests/"
-        }
-    },
-    "scripts": {
-        "post-autoload-dump": [
-            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
-        ],
-        "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
-        ],
-        "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-        ],
-        "post-create-project-cmd": [
-            "@php artisan key:generate --ansi",
-            "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
-            "@php artisan migrate --graceful --ansi"
-        ],
-        "dev": [
-            "Composer\\Config::disableProcessTimeout",
-            "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite --kill-others"
-        ],
-        "test": [
-            "@php artisan config:clear --ansi",
-            "@php artisan test"
-        ]
-    },
-    "extra": {
-        "laravel": {
-            "dont-discover": []
-        }
-    },
-    "config": {
-        "optimize-autoloader": true,
-        "preferred-install": "dist",
-        "sort-packages": true,
-        "allow-plugins": {
-            "pestphp/pest-plugin": true,
-            "php-http/discovery": true
-        }
-    },
-    "minimum-stability": "stable",
-    "prefer-stable": true
-}
+<?php
+
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\PelangganController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\MatakuliahController;
+
+Route::get('/',function(){
+    return view('welcome');
+});
+
+Route::get('/pcr', function () {
+    return 'Selamat Datang di website Kampus PCR!';
+});
+
+Route::get('/mahasiswa', function () {
+    return 'Hallo Mahasiswa';
+});
+
+Route::get('/nama/{param1}', function ($param1) {
+    return 'Nama saya: '.$param1;
+});
+
+Route::get('/nim/{param1?}', function ($param1 = '') {
+    return 'Nim saya: '.$param1;
+});
+
+ROute::get('/mahasiswa/{param1}', [MahasiswaController::class, 'show']);
+
+Route::get('/about',function(){
+    return view('halaman-about');
+});
+
+Route::get('/matakuliah', [MatakuliahController::class, 'index']);
+Route::get('/matakuliah/show/{id?}', [MatakuliahController::class, 'show']);
+
+Route::get('/home',[QuestionController::class, 'index'])->name('home.index');
+
+Route::post('question/store', [QuestionController::class, 'store'])
+		->name('question.store');
+
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/pegawai', [PegawaiController::class, 'index'])
+    ->name('pegawai.index');
+
+Route::post('/pegawai/store', [PegawaiController::class, 'store'])
+    ->name('pegawai.store');
+
+Route::get('/pegawai/show', [PegawaiController::class, 'show'])
+    ->name('pegawai.show');
+
+Route::get('dashboard',[DashboardController::class, 'index'])
+    ->name('dashboard');
+
+Route::resource('pelanggan', PelangganController::class);
+
+Route::resource('user',UserController::class);
+
+Route::resource('mahasiswa', MahasiswaController::class);
+
+//Ilham Aryansyah is here to be the number one

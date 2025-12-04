@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Hash; // <-- TAMBAH INI
 use App\Models\User;
 
 class LoginController extends Controller
@@ -37,7 +37,7 @@ class LoginController extends Controller
             // 4. LOGIN BERHASIL
             Auth::login($user);
 
-            // 5. Redirect ke halaman users
+            // 5. Redirect ke halaman dashboard
             return redirect()->route('dashboard')->with('success', 'Login berhasil! Selamat datang ' . $user->name);
         }
 
